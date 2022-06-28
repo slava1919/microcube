@@ -1,0 +1,37 @@
+service:   # service db
+  name: db
+spec:
+    ports:
+      httpPort: 5432
+    clusterIP: none
+
+service:    # service words
+  name: words
+spec:
+    ports:
+        httpPort: 8080
+    clusterIP: none
+
+container:
+    name: db
+    image: dockersamples/k8s-wordsmith-db
+    ports:
+       containerPort: 5432
+
+container:
+  name: words
+  image: dockersamples/k8s-wordsmith-api
+  ports:
+      containerPort: 8080
+
+replicaCount: 5 # words-api
+
+container:
+  name: web
+  image: dockersamples/k8s-wordsmith-web
+  ports:
+     containerPort: 80
+
+# {{ .Values.container.image }}
+# {{default 5432 .Values.httpPort}}
+# {{ .Values.service.spec.ports }}
