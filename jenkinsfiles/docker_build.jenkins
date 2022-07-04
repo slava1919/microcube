@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('db') {
-                sh 'docker build -t slava121/k8s-wordsmith-db . '      
+                         sh 'docker build -t slava121/k8s-wordsmith-db . '      
                 }         
             }
         } 
@@ -59,7 +59,7 @@ pipeline {
          stage("create docker image") {
              steps {
                  echo " ============== start building image ==================" 
-                 dir ('web') {
+                dir ('web') {
                          sh 'docker build -t slava121/k8s-wordsmith-web . ' 
                 }         
             }
@@ -72,4 +72,4 @@ pipeline {
                 } 
             }     
         }
-    } 
+    }  
