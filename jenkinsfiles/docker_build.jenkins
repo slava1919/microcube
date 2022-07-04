@@ -25,7 +25,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
-                dir ('docker/toolbox') {
+                dir ('db') {
                          sh 'docker build -t slava121/k8s-wordsmith-db . '
                 }         
             }
