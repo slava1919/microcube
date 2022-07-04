@@ -39,20 +39,32 @@ pipeline {
                 }
             }
         }
-         stage("create docker image") {
-             steps {
-                 echo " ============== start building image ==================" 
-                 dir ('web') {
-                         sh 'docker build -t slava121/k8s-wordsmith-web . ' 
+    stages {
+        stage("docker login") {
+            steps {
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_slava121', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login -u $USERNAME -p $PASSWORD
+                    """
+                }
+            }
+        }
+        stage("create docker image") {
+            steps {
+                echo " ============== start building image =================="
+                dir ('db') {
+                         sh 'docker build -t slava121/k8s-wordsmith-api  . '      
                 }         
             }
-        } 
-        stage("docker push") {
+        }
+                stage("docker push") {
             steps {
                  echo " ============== start pushing image =================="
                  sh '''
-                 docker push slava121/k8s-wordsmith-web                                                         
-                } 
-            }     
+                 docker push slava121/k8s-wordsmith-api
+                 '''
+                }
+            }
         }
     } 
