@@ -1,0 +1,12 @@
+pipeline {
+    agent { 
+        label 'master'
+        }
+    stages {
+         stage("Helm install")
+             steps {
+                   echo "=====================Helm instal================"
+                      { sh ' helm install Chart/ '  
+                      }
+                   }   
+                }   
