@@ -27,33 +27,26 @@ pipeline {
                 echo " ============== start building image =================="
                 dir ('db') {
                          sh 'docker build -t slava121/k8s-wordsmith-db . '
+                dir ('words') {
+                         sh 'docker build -t slava121/k8s-wordsmith-api . '
+                dir ('web') {
+                         sh 'docker build -t slava121/k8s-wordsmith-web . '         
                 }         
             }
         } 
-        stage("docker push") {
-            steps {
-                echo " ============== start pushing image =================="
-                sh '''
-                docker push slava121/k8s-wordsmith-db
-                '''
-            } 
-        }    
-    }
-        stage("create docker image") {
-        steps {
-            echo " ============== start building image =================="
-            dir ('words') {
-                     sh 'docker build -t slava121/k8s-wordsmith-api . '
-            }         
-        }
-    } 
     stage("docker push") {
         steps {
             echo " ============== start pushing image =================="
             sh '''
+            docker push slava121/k8s-wordsmith-db
+            '''
+            sh '''
             docker push slava121/k8s-wordsmith-api
+            '''
+            sh '''
+            docker push slava121/k8s-wordsmith-web
             '''
            } 
        }     
     }
-}
+ }   
