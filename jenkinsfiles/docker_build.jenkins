@@ -56,21 +56,4 @@ pipeline {
            } 
        }     
     }
-    stage("create docker image") {
-        steps {
-            echo " ============== start building image =================="
-            dir ('web') {
-                     sh 'docker build -t slava121/k8s-wordsmith-web . '
-            }         
-        }
-    } 
-    stage("docker push") {
-        steps {
-            echo " ============== start pushing image =================="
-            sh '''
-            docker push slava121/k8s-wordsmith-web
-            '''
-            } 
-        }     
-    }
- }  
+}
