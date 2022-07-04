@@ -41,6 +41,11 @@ pipeline {
                  sh '''
                  docker push slava121/k8s-wordsmith-db
                  '''
+                 sh '''
+                 docker push slava121/k8s-wordsmith-api 
+                 '''
+                 sh '''
+                 docker push slava121/k8s-wordsmith-web
                 }
             }
         }
