@@ -53,7 +53,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
-                dir ('db') {
+                dir ('web') {
                          sh 'docker build -t slava121/k8s-wordsmith-api  . '      
                 }         
             }
