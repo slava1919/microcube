@@ -6,7 +6,7 @@ pipeline {
          stage("Helm install")
              steps {
                    echo "=====================Helm instal================"
-                      {it -> sh " helm install Chart/ "  
+                      { sh " helm install app Chart/ "  
                       }
                    }   
                 }
