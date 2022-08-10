@@ -4,9 +4,11 @@ pipeline {
         }
     stages {
          stage("Helm install")
-             steps {
+                   steps {
                    echo "=====================Helm instal================"
+                   dir ('Chart') {
                       ' sh " helm install app Chart/ "  '
                     }   
                 }
              }   
+          }
